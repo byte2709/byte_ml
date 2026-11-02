@@ -1,18 +1,18 @@
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 
-from sklearn.datasets import fetch_california_housing
+from sklearn.datasets import load_diabetes
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
-# Load dataset
-housing = fetch_california_housing(as_frame=True)
-X = housing.data
-y = housing.target
+# Load Diabetes dataset
+data = load_diabetes()
+X = pd.DataFrame(data.data, columns=data.feature_names)
+y = data.target
 
 # Display dataset
 print("Features Preview:")
@@ -39,7 +39,7 @@ for col, coef in zip(X.columns, model.coef_):
 
 print("Intercept:", round(model.intercept_, 4))
 
-# Predict house values
+# Predict disease progression
 y_pred = model.predict(X_test_scaled)
 
 # Evaluate model performance
@@ -48,9 +48,9 @@ rmse = np.sqrt(mse)
 r2 = r2_score(y_test, y_pred)
 
 print("\nRegression Evaluation Metrics:")
-print(f"Mean Squared Error (MSE): {mse:.4f}")
-print(f"Root Mean Squared Error (RMSE): {rmse:.4f}")
-print(f"R-squared Score (R²): {r2:.4f}")
+print(f"MSE: {mse:.4f}")
+print(f"RMSE: {rmse:.4f}")
+print(f"R-squared Score: {r2:.4f}")
 
 # Visualize actual vs predicted values
 plt.figure(figsize=(8, 6))
@@ -61,9 +61,9 @@ plt.plot(
     "r--", label="Perfect Fit"
 )
 
-plt.xlabel("Actual House Value")
-plt.ylabel("Predicted House Value")
-plt.title("Multiple Linear Regression: Actual vs Predicted")
+plt.xlabel("Actual Disease Progression")
+plt.ylabel("Predicted Disease Progression")
+plt.title("Multiple Linear Regression")
 plt.legend()
 plt.grid(True)
 plt.show()
