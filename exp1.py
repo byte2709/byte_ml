@@ -3,7 +3,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
-#https://ollama.com/install.ps1 | iex
 from sklearn.pipeline import Pipeline
 
 """
